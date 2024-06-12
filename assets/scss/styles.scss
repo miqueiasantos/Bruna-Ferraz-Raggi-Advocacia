@@ -1,0 +1,1083 @@
+@import 'reset';
+@import 'fonts';
+@import 'variables';
+@import 'mixin';
+
+html,
+body { width: 100%; height: 100%; min-height: 100vh;}
+
+body {
+    font-family: "Poppins", "Arial", "sans-serif";
+    font-weight: normal;
+    font-size: 18px;
+    color: $font-color;
+    line-height: 1.4em;
+    background-color: #173945;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    line-height: 1em;
+    margin: 0.5em 0;
+}
+
+strong {font-weight: 600;}
+
+#content {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#content .container {
+    width: 100%;
+    max-width: 695px;
+    padding: 50px 30px;
+}
+#content .container h1 {
+    visibility: hidden;
+    margin: 0;
+    height: 0;
+}
+#content .container .logo {
+    margin: 0 auto 50px auto;
+    display: table;
+}
+#content .container p {
+    font-size: 16px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0 auto;
+    max-width: 590px;
+}
+#content .container p.destaque {
+    margin-bottom: 50px;
+}
+#content .container hr {
+    border-width: 1px 0 0 0;
+    border-style: dashed;
+    border-color: #46AA9E;
+    margin: 26px 0;
+}
+#content .container .links {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    @media(max-width: map-get($breakpoints, medium)) {
+        flex-direction: column;
+    }
+}
+#content .container .links .link {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #FFFFFF;
+    @media(max-width: map-get($breakpoints, medium)) {
+        font-size: 14px;
+    }
+}
+#content .container .links .link.phone {
+    font-size: 18px;
+}
+#content .container .links .link svg {
+    margin-right: 10px;
+}
+#content .container footer {
+    font-size: 13px;
+    color: #46AA9E;
+    text-align: center;
+}
+
+
+
+
+
+#topo {
+    width: 100%;
+    padding: 18px 0;
+    background-color: #FFFFFF;
+    transition: all 250ms ease-in-out;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    &.fixed {
+        position: fixed;
+        padding: 14px 0;
+        -webkit-box-shadow: 0px 4px 5px -6px #000000;
+        box-shadow: 0px 4px 5px -6px #000000;
+        h1 {
+            svg {
+                width: 162px;
+                height: 40px;
+            }
+        }
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    h1 {
+        margin: 0 auto 0 0;
+        svg {
+            @media(max-width: map-get($breakpoints, xlarge)) {
+                width: 186px;
+                height: 46px;
+            }
+            @media(max-width: map-get($breakpoints, xsmall)) {
+                width: 162px;
+                height: 40px;
+            }
+        }
+    }
+    ul {
+        list-style: none;
+        display: flex;
+        @media(max-width: map-get($breakpoints, medium)) {
+            display: none;
+        }
+        li {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 1.4em;
+            margin: 0 12px;
+            border-top: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            @media(max-width: map-get($breakpoints, xlarge)) {
+                margin: 0 10px;
+            }
+            &.ativo,
+            &:hover {
+                border-bottom-color: $primary-color;
+            }
+            a {
+                color: $primary-color;
+            }
+        }
+    }
+    .lang {
+        display: flex;
+        margin-left: 20px;
+        a {
+            width: 26px;
+            height: 17px;
+            border-radius: 50px;
+            margin-left: 10px;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.box-menu-produtos {
+    position: absolute;
+    right: 10%;
+    top: 71px;
+    z-index: 12;
+    background-color: #FFFFFF;
+    display: flex;
+    -webkit-box-shadow: 0px 0px 12px -3px rgba(0, 0, 0, 0.59);
+    box-shadow: 0px 0px 12px -3px rgba(0, 0, 0, 0.59);
+    opacity: 0;
+    visibility: hidden;
+    transition: all linear 250ms;
+    &.ativo {
+        opacity: 1;
+        visibility: visible;
+        .categorias,
+        .produtos-itens {
+            opacity: 1;
+        }
+    }
+    .categorias {
+        opacity: 0;
+        background-color: rgb(204, 236, 235);
+        a {
+            display: block;
+            padding: 15px 16px;
+            margin-top: 1px;
+            background-color: rgb(204, 236, 235);
+            white-space: nowrap;
+            font-size: 15px;
+            font-weight: bold;
+            color: $primary-color;
+            position: relative;
+            &:first-child {
+                margin-top: 0;
+            }
+            &.active {
+                background-color: $primary-color;
+                color: #FFFFFF;
+                &::after {
+                    content: "";
+                    border-top: 27px solid transparent;
+                    border-bottom: 27px solid transparent;
+                    border-left: 10px solid $primary-color;
+                    position: absolute;
+                    right: -10px;
+                    top: 0;
+                }
+            }
+        }
+    }
+    .produtos-itens {
+        opacity: 0;
+        display: none;
+        padding: 10px 8px 10px 18px;
+        max-width: 440px;
+        overflow-y: auto;
+        max-height: 50vh;
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+            &:hover {
+                background: #555;
+            }
+        }
+        .item {
+            padding: 10px;
+            display: flex;
+            margin-bottom: 12px;
+            background-color: #f2f2f2;
+            figure {
+                width: 65px;
+                height: 65px;
+                margin-right: 14px;
+                overflow: hidden;
+                background-color: #FFFFFF;
+                flex-shrink: 0;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+            .tt {
+                font-weight: bold;
+                margin: 0 0 6px 0;
+                font-size: 14px;
+                color: $primary-color;
+            }
+            p {
+                font-size: 14px;
+                line-height: 1.3em;
+                color: $font-color;
+            }
+        }
+    }
+}
+
+.warp-submenu {
+    position: absolute;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: none;
+    &.ativo {
+        display: block;
+    }
+}
+
+.navicon {
+    position: relative;
+    padding-left: 1.25em;
+    text-indent: -999px;
+    overflow: hidden;
+    display: none;
+    @media(max-width: map-get($breakpoints, medium)) {
+        display: block;
+    }
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.25em;
+        width: 1.25em;
+        height: 0.12em;
+        background: $secondary-color;
+        box-shadow: 0 0.4em 0 0 $secondary-color, 0 0.8em 0 0 $secondary-color;
+    }
+}
+
+#slide-out {
+    li {
+        &:first-child {
+            margin-top: 14px;
+        }
+    }
+}
+
+#destaques {
+    background: url("../images/bg-destaque3.jpg") center center no-repeat $primary-color;
+    background-size: cover;
+    margin-bottom: 72px;
+    transition: all ease-in 300ms;
+    @media(max-width: map-get($breakpoints, xlarge)) {
+        padding: 75px 0;
+    }
+    @media(max-width: map-get($breakpoints, xsmall)) {
+        padding: 50px 0;
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        &::before {
+            content: "";
+            padding-bottom: 75.179%;
+            @media(max-width: map-get($breakpoints, xlarge)) {
+                display: none;
+            }
+        }
+    }
+    .info {
+        padding-bottom: 85px;
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            padding-bottom: 55px;
+        }
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            padding-bottom: 0;
+        }
+    }
+    h2 {
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 1.389em;
+        color: #FFFFFF;
+        margin: 0 0 20px 0;
+        max-width: 500px;
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            font-size: 28px;
+            max-width: 420px;
+        }
+        @media(max-width: map-get($breakpoints, xsmall)) {
+            font-size: 26px;
+        }
+    }
+    p {
+        font-size: 24px;
+        color: #FFFFFF;
+        max-width: 704px;
+        @media(max-width: map-get($breakpoints, xxlarge)) {
+            max-width: 600px;
+        }
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            font-size: 18px;
+            max-width: 450px;
+        }
+    }
+}
+
+.box-capa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 80px;
+    @media(max-width: map-get($breakpoints, xsmall)) {
+        flex-wrap: wrap;
+    }
+    .info {
+        max-width: 380px;
+        @media(max-width: map-get($breakpoints, xxlarge)) {
+            width: calc(56.339% - 30px);
+        }
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            width: 100%;
+            padding-right: 30px;
+        }
+        @media(max-width: map-get($breakpoints, xsmall)) {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin-bottom: 20px;
+        }
+        &.info2 {
+            max-width: 456px;
+            @media(max-width: map-get($breakpoints, xxlarge)) {
+                padding-left: 30px;
+                max-width: 486px;
+            }
+            @media(max-width: map-get($breakpoints, xlarge)) {
+                width: 100%;
+                padding-right: 0;
+            }
+        }
+    }
+    .img-missao {
+        @media(max-width: map-get($breakpoints, xxlarge)) {
+            width: 53.661%;
+        }
+        @media(max-width: map-get($breakpoints, xsmall)) {
+            width: 100%;
+        }
+    }
+    .img-industria {
+        @media(max-width: map-get($breakpoints, xxlarge)) {
+            width: 50%;
+        }
+        @media(max-width: map-get($breakpoints, xsmall)) {
+            width: 100%;
+            order: 2;
+        }
+    }
+    .icon {
+        width: 177px;
+        border-bottom: 4px solid $primary-color;
+        margin-bottom: 13px;
+        padding-bottom: 40px;
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            padding-bottom: 20px;
+        }
+        svg {
+            @media(max-width: map-get($breakpoints, xlarge)) {
+                width: 100px;
+                height: 90px;
+            }
+        }
+    }
+    h3 {
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 1.389em;
+        margin: 0 0 6px 0;
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            font-size: 30px;
+        }
+    }
+    p {
+        font-size: 24px;
+        line-height: 1.392em;
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            font-size: 18px;
+        }
+    }
+}
+
+#produtos-capa {
+    background-color: $primary-color;
+    padding: 45px 0 78px 0;
+    .tt {
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 1.2em;
+        text-align: center;
+        color: #FFFFFF;
+        text-align: center;
+        margin: 0 0 50px 0;
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            font-size: 32px;
+        }
+    }
+    .box-slides {
+        padding: 0 60px;
+        margin: 0 auto;
+        max-width: 970px;
+    }
+}
+
+.tns-controls {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    bottom: -120px;
+    margin-top: -32px;
+    button {
+        width: 32px;
+        height: 32px;
+        background: url("../images/nav-icon.png") 0 0 no-repeat;
+        border: 0;
+        text-indent: -9999px;
+        overflow: hidden;
+        margin-right: -60px;
+        &[data-controls="prev"] {
+            transform: rotate(-180deg);
+            margin-left: -60px;
+            margin-right: 0;
+        }
+    }
+}
+
+#tns1>.tns-item {
+    padding: 0 15px;
+}
+
+.box-produtos-capa {
+    display: flex;
+    margin: 0 -15px;
+    @media(max-width: 1023px) {
+        flex-wrap: wrap;
+        margin: 0;
+        justify-content: space-between;
+    }
+    .box-produto {
+        width: 25%;
+        margin: 0 15px;
+        max-width: 100%;
+        @media(max-width: 1023px) {
+            width: calc(50% - 15px);
+            margin: 0 0 30px 0;
+        }
+        @media(max-width: 413px) {
+            width: 100%;
+            margin: 0 0 30px 0;
+        }
+        .tt-produto {
+            font-size: 18px;
+        }
+    }
+}
+
+.box-produto {
+    max-width: 206px;
+    margin: 0 auto 12px auto;
+    background-color: #FFF;
+    box-shadow: 1px 1px 15px -5px #000000;
+    figure {
+        width: 100%;
+        display: flex;
+        position: relative;
+        margin-bottom: 0;
+        &::before {
+            content: "";
+            padding-bottom: 100%;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit: contain;
+        }
+    }
+    .tt-produto {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 139.19%;
+        text-align: center;
+        color: #FFFFFF;
+        border-top: 1px solid #e2e2e2;
+        padding: 20px 25px;
+        margin: 0;
+        @media(max-width: map-get($breakpoints, large)) {
+            font-size: 16px;
+        }
+        a {
+            color: $primary-color;
+        }
+    }
+}
+
+#internas {
+    padding: 75px 0;
+    background: #F3F3F3;
+    .box-tt-page {
+        margin-bottom: 50px;
+        background: url("../images/bg-header-page.jpg") center top no-repeat;
+        background-size: cover;
+        padding: 90px 0;
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            @media(max-width: 767px) {
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+        .voltar {
+            font-size: 22px;
+            font-weight: 500;
+            color: #FFFFFF;
+            white-space: nowrap;
+            svg {
+                width: 12px;
+                vertical-align: middle;
+                margin-left: 5px;
+            }
+        }
+        .tt-page {
+            margin: 0;
+            color: #FFFFFF;
+            @media(max-width: 767px) {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+            &::before {
+                display: none;
+            }
+        }
+    }
+    .tt-page {
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 1.389em;
+        color: #53514E;
+        margin-bottom: 50px;
+        &::before {
+            content: "";
+            display: block;
+            width: 177px;
+            height: 4px;
+            margin-bottom: 12px;
+            background-color: $primary-color;
+        }
+    }
+    .categorias {
+        width: 100%;
+        max-width: 604px;
+        li {
+            background-color: $primary-color;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            a {
+                color: #FFFFFF;
+                padding: 9px 24px 9px 22px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &::after {
+                    content: "";
+                    display: block;
+                    border-left: 12px solid #fff;
+                    border-top: 8px solid transparent;
+                    border-bottom: 8px solid transparent;
+                }
+            }
+        }
+    }
+    .tt-categoria {
+        color: #FFFFFF;
+        padding: 9px 34px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $primary-color;
+        border-radius: 15px;
+        font-size: 20px;
+        line-height: 1.2em;
+        text-align: center;
+        font-weight: 700;
+        display: table;
+        margin: 0 auto 50px auto;
+    }
+    .box-produto-item {
+        display: flex;
+        @media(max-width: map-get($breakpoints, large)) {
+            flex-wrap: wrap;
+        }
+        figure {
+            flex-shrink: 0;
+            margin-right: 35px;
+            @media(max-width: map-get($breakpoints, large)) {
+                margin: 0 auto 35px auto;
+                width: 100%;
+            }
+            img {
+                width: 100%;
+                max-width: 450px;
+                @media(max-width: map-get($breakpoints, large)) {
+                    max-width: 100%;
+                    width: auto;
+                    margin: 0 auto;
+                    display: table;
+                }
+            }
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-weight: bold;
+            margin-bottom: 1em;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+    }
+    .lista-produtos {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 50px;
+        max-width: 940px;
+        margin: 0 auto;
+        @media(max-width: map-get($breakpoints, large)) {
+            grid-template-columns: 1fr 1fr;
+        }
+        @media(max-width: map-get($breakpoints,
+        xsmall)) {
+            grid-template-columns: 1fr;
+        }
+        .box-produto {
+            color: $font-color;
+            font-size: 16px;
+            line-height: 1.2em;
+            text-align: center;
+            max-width: 100%;
+            box-shadow: none;
+            background-color: transparent;
+            .tt-produto {
+                color: $primary-color;
+                font-weight: 600;
+                border: 0;
+                padding: 0;
+                margin-bottom: 0.3em;
+            }
+            figure {
+                margin-bottom: 24px;
+                img {
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+    .info-produto {
+        h1 {
+            font-weight: bold;
+            font-size: 32px;
+            line-height: 1.2em;
+            color: $primary-color;
+            margin: 0 0 6px 0;
+        }
+        .tt-carac {
+            font-weight: bold;
+            font-size: 26px;
+            line-height: 1.2em;
+            color: $primary-color;
+            margin: 0 0 16px 0;
+        }
+        .descricao {
+            font-size: 16px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid #6765636b;
+            padding-bottom: 10px;
+            line-height: 1.2em;
+        }
+        p {
+            margin-bottom: 1.2em;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-weight: bold;
+        }
+        ul {
+            padding-left: 18px;
+            li {
+                list-style: initial;
+            }
+        }
+        .anvisa {
+            margin: 35px 0;
+            font-size: 15px;
+            line-height: 1.4em;
+        }
+    }
+    .box-tabela {
+        a {
+            display: block;
+            font-size: 17px;
+            color: $primary-color;
+            margin-bottom: 2px;
+            padding: 10px 20px;
+            background-color: rgba(0, 161, 155, 0.14);
+        }
+    }
+}
+
+#equipe {
+    background: url("../images/equipe_new.jpg") center top $primary-color;
+    background-size: cover;
+    @media(max-width: map-get($breakpoints, large)) {
+        background: $primary-color;
+    }
+    .container {
+        height: 720px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        @media(max-width: map-get($breakpoints, xxlarge)) {
+            height: 675px;
+        }
+        @media(max-width: map-get($breakpoints,
+        xlarge)) {
+            padding-top: 60px;
+            padding-bottom: 60px;
+            height: auto;
+        }
+    }
+    .info {
+        width: 48%;
+        font-size: 24px;
+        line-height: 1.4em;
+        color: #FFFFFF;
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            width: 64%;
+        }
+        @media(max-width: map-get($breakpoints,
+        large)) {
+            width: 100%;
+            font-size: 22px;
+        }
+        img {
+            @media(max-width: map-get($breakpoints, xlarge)) {
+                width: 80px;
+            }
+        }
+        h2 {
+            font-weight: bold;
+            font-size: 36px;
+            line-height: 1.389em;
+            color: #FFFFFF;
+            margin: 20px 0 34px 0;
+            &::before {
+                content: "";
+                display: block;
+                width: 177px;
+                height: 4px;
+                background-color: #FFFFFF;
+                margin-bottom: 12px;
+                @media(max-width: map-get($breakpoints, xlarge)) {
+                    width: 150px;
+                }
+            }
+        }
+    }
+}
+
+#industria {
+    background: url("../images/bg-industria.jpg") center top $primary-color;
+    background-size: auto 100%;
+    background-attachment: fixed;
+    @media(max-width: map-get($breakpoints, large)) {
+        background: $primary-color;
+    }
+    .container {}
+    .info {
+        padding: 70px 0;
+        width: 52%;
+        font-size: 24px;
+        line-height: 1.4em;
+        color: #FFFFFF;
+        display: table;
+        margin-left: auto;
+        @media(max-width: map-get($breakpoints, xlarge)) {
+            width: 64%;
+        }
+        @media(max-width: map-get($breakpoints,
+        large)) {
+            width: 100%;
+            font-size: 22px;
+        }
+        img {
+            @media(max-width: map-get($breakpoints, xlarge)) {
+                width: 80px;
+            }
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-weight: bold;
+            margin-bottom: 1em;
+            text-decoration: underline;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        h2 {
+            font-weight: bold;
+            font-size: 36px;
+            line-height: 1.389em;
+            color: #FFFFFF;
+            margin: 20px 0 34px 0;
+            text-decoration: none;
+            &::before {
+                content: "";
+                display: block;
+                width: 177px;
+                height: 4px;
+                background-color: #FFFFFF;
+                margin-bottom: 12px;
+                @media(max-width: map-get($breakpoints, xlarge)) {
+                    width: 150px;
+                }
+            }
+        }
+    }
+}
+
+.contato {
+    background: $primary-color !important;
+    .tt-page {
+        color: #FFFFFF !important;
+        &::before {
+            background-color: #FFFFFF !important;
+        }
+    }
+    .box-contato {
+        display: flex;
+        margin: 0 -15px;
+        font-size: 24px;
+        color: #FFFFFF;
+        @media(max-width: map-get($breakpoints, medium)) {
+            flex-wrap: wrap;
+        }
+        .formulario {
+            margin: 0 15px;
+            width: 60%;
+            @media(max-width: map-get($breakpoints, large)) {
+                width: 50%;
+            }
+            @media(max-width: map-get($breakpoints,
+            medium)) {
+                width: 100%;
+                order: 2;
+            }
+        }
+        .info {
+            margin: 0 15px;
+            width: 40%;
+            @media(max-width: map-get($breakpoints, large)) {
+                width: 50%;
+            }
+            @media(max-width: map-get($breakpoints,
+            medium)) {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+        p {
+            margin-bottom: 1em;
+        }
+    }
+    form {
+        max-width: 540px;
+    }
+    input,
+    select,
+    textarea {
+        width: 100%;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        color: #FFFFFF;
+        padding: 12px 20px;
+        margin-bottom: 26px;
+        background-color: transparent;
+        border: 1px solid #FFFFFF;
+        height: auto;
+        display: block;
+        option {
+            color: $font-color;
+        }
+    }
+    button {
+        font-family: 'Roboto', sans-serif;
+        background: $font-color;
+        color: #FFFFFF;
+        border: 0;
+        width: 170px;
+        height: 44px;
+        font-size: 24px;
+    }
+}
+
+#rodape {
+    padding-top: 70px;
+    @media(max-width: map-get($breakpoints, large)) {
+        padding-top: 50px;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        @media(max-width: map-get($breakpoints, xsmall)) {
+            justify-content: center;
+        }
+    }
+    ul {
+        list-style: none;
+        display: flex;
+        @media(max-width: map-get($breakpoints, xsmall)) {
+            display: none;
+        }
+        li {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.4em;
+            margin: 0 24px 0 0;
+            border-bottom: 2px solid #fff;
+            a {
+                color: $primary-color;
+            }
+        }
+    }
+    .redes {
+        a {
+            margin: 0 10px;
+            @media(max-width: map-get($breakpoints, large)) {
+                margin: 0 6px;
+            }
+            img {
+                @media(max-width: map-get($breakpoints, large)) {
+                    height: 22px;
+                }
+            }
+        }
+    }
+    .corpiring {
+        width: 100%;
+        margin-top: 54px;
+        border-top: 1px solid #222121;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+        line-height: 19px;
+        padding: 40px 0;
+        @media(max-width: map-get($breakpoints, large)) {
+            margin-top: 34px;
+        }
+        @media(max-width: map-get($breakpoints,
+        xsmall)) {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        img {
+            width: 154px;
+        }
+        span {
+            color: $primary-color;
+        }
+        div {
+            @media(max-width: map-get($breakpoints, xsmall)) {
+                text-align: center;
+                margin-top: 16px;
+            }
+        }
+    }
+}
